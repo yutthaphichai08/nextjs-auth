@@ -12,7 +12,8 @@ function RegisterPage() {
   const [error, setError] = useState("");
 
   const handleSubmit = async (e) => {
-    e.preventdefault();
+    e.preventDefault();
+
     if (password != confirmPassword) {
       setError("Password do not match!");
       return;
@@ -20,6 +21,30 @@ function RegisterPage() {
     if (!name || !email || !password || !confirmPassword) {
       setError(" Please complete all inputs!");
       return;
+    }
+
+    try {
+      const res = await fetch("http://localhost:3000/api/register", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name,
+          email,
+          password,
+        }),
+      });
+
+      if (res.ok) {
+        const form = e.target;
+        setError("");
+        form.reset();
+      } else {
+        console.log("User registration failed.");
+      }
+    } catch (error) {
+      console.log("Error during registration", error);
     }
   };
 
@@ -30,12 +55,12 @@ function RegisterPage() {
         <h3>Register Page</h3>
         <hr className="my-3" />
         <form onSubmit={handleSubmit}>
-            
           {error && (
             <div className="bg-red-500 w-fit text-sm text-white py-1 px-3 rounded-md mt-2">
               {error}
             </div>
           )}
+
           <input
             onChange={(e) => setName(e.target.value)}
             className="block bg-gray-300 p-2 my-2 rounded-md"
