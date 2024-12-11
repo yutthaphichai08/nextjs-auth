@@ -1,9 +1,9 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 
 import { useSession, signIn } from "next-auth/react";
-import { useRouter, redirect } from "next/navigation";
+import { useRouter } from "next/navigation";
 import Link from "next/link";
 import Navbar from "../components/Navbar";
 
@@ -13,9 +13,13 @@ function LoginPage() {
   const [error, setError] = useState("");
 
   const router = useRouter();
-
   const { data: session } = useSession();
-  if (session) router.replace("/welcome");
+  
+  useEffect(() => {
+    if (session) {
+      router.replace("/welcome");
+    }
+  }, [session, router]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();

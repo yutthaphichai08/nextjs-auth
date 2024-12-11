@@ -33,10 +33,12 @@ function Navbar({ session }) {
                   Profile
                 </a>
               </li>
+
               <li className="mx-3">
                 <a
                   onClick={() => signOut()}
                   className="bg-red-500 text-white border py-2 px-3 rounded-md text-lg my-2"
+                  style={{cursor:'pointer'}}
                 >
                   Logout
                 </a>

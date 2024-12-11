@@ -6,8 +6,8 @@ import { useSession } from "next-auth/react";
 import { redirect } from "next/navigation";
 
 function WelcomePage() {
-  const { data: session, status } = useSession();
-  console.log(session);
+  const { data: session } = useSession();
+  // console.log(session);
 
   if (!session) redirect("/login");
 
