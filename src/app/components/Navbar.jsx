@@ -24,6 +24,15 @@ function Navbar({ session }) {
                 </li>
               </>
             ) : (
+              <>
+              <li className="mx-3">
+                <a
+                  href="/welcome"
+                  className="bg-gray-500 text-white border py-2 px-3 rounded-md text-lg my-2"
+                >
+                  Profile
+                </a>
+              </li>
               <li className="mx-3">
                 <a
                   onClick={() => signOut()}
@@ -32,6 +41,7 @@ function Navbar({ session }) {
                   Logout
                 </a>
               </li>
+            </>
             )}
           </ul>
         </div>
